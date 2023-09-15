@@ -1,0 +1,25 @@
+#include <FirebaseArduino.h> #include<ESP8266WiFi.h> #include<DNSServer.h> #include<ESP8266WebServer.h> #include<WiFiManager.h>
+#include <TinyGPS++.h> #include <SoftwareSerial.h>
+#include "Wire.h"
+#include <MPU6050_light.h>
+MPU6050 mpu(Wire);
+#define FIREBASE_HOST "smart-accident-notifier-c8925-default-rtdb.firebaseio.com" #define FIREBASE_AUTH "MVjoYPZZDn585Pa9gRFewgO1P3ehPpoRaRw4TNin"
+#define WIFI_SSID "Nokia 3.1"
+#define WIFI_PASSWORD "@#N3_1@#"
+// Choose two Arduino pins to use for software serial int RXPin = 2;
+int TXPin = 0;
+const byte red = 14;
+const byte green = 12;
+TinyGPSPlus gps;
+SoftwareSerial gpsSerial(RXPin, TXPin);
+int GPSBaud = 9600;
+float V;
+float Latitude_, Longitude_;
+String Latitude_str, Longitude_str, voltage; int Hour, Minute, Second;
+int Day, Month, Year;
+String altitude_;
+bool accident = 0;
+String Date_str;
+String Time_str;
+String AM_PM;
+float X, Y, Z;
